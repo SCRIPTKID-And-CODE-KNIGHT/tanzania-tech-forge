@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
+import emailjs from '@emailjs/browser';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -23,6 +24,8 @@ import {
 
 const Contact = () => {
   const { toast } = useToast();
+  const formRef = useRef<HTMLFormElement>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -42,7 +45,7 @@ const Contact = () => {
     "General Inquiry"
   ];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     // Basic validation
@@ -55,21 +58,46 @@ const Contact = () => {
       return;
     }
 
-    // Here you would typically send the data to your backend
-    toast({
-      title: "Message Sent!",
-      description: "We'll get back to you within 24 hours.",
-    });
+    setIsSubmitting(true);
 
-    // Reset form
-    setFormData({
-      fullName: "",
-      email: "",
-      phone: "",
-      service: "",
-      message: "",
-      contactMethod: "email"
-    });
+    try {
+      // For now, we'll redirect to WhatsApp or email based on preference
+      if (formData.contactMethod === 'whatsapp') {
+        const whatsappMessage = `Hi! I'd like to inquire about ${formData.service}.%0A%0AName: ${formData.fullName}%0AEmail: ${formData.email}%0APhone: ${formData.phone}%0A%0AMessage: ${formData.message}`;
+        window.open(`https://wa.me/255756377013?text=${whatsappMessage}`, '_blank');
+      } else {
+        // Create mailto link
+        const subject = `Service Inquiry: ${formData.service}`;
+        const body = `Name: ${formData.fullName}%0AEmail: ${formData.email}%0APhone: ${formData.phone}%0AService: ${formData.service}%0A%0AMessage:%0A${formData.message}`;
+        window.open(`mailto:technociphernet@gmail.com?subject=${subject}&body=${body}`, '_blank');
+      }
+
+      toast({
+        title: "Redirecting to contact method!",
+        description: formData.contactMethod === 'whatsapp' 
+          ? "Opening WhatsApp with your message..." 
+          : "Opening your email client with the message...",
+      });
+
+      // Reset form
+      setFormData({
+        fullName: "",
+        email: "",
+        phone: "",
+        service: "",
+        message: "",
+        contactMethod: "email"
+      });
+
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Something went wrong. Please try again or contact us directly.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleInputChange = (field: string, value: string) => {
@@ -279,9 +307,15 @@ const Contact = () => {
                       </RadioGroup>
                     </div>
 
-                    <Button type="submit" variant="hero" size="lg" className="w-full">
+                    <Button 
+                      type="submit" 
+                      variant="hero" 
+                      size="lg" 
+                      className="w-full" 
+                      disabled={isSubmitting}
+                    >
                       <Send className="w-5 h-5 mr-2" />
-                      Send Message
+                      {isSubmitting ? "Sending..." : "Send Message"}
                     </Button>
                   </form>
                 </CardContent>
