@@ -92,7 +92,7 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-white/20 py-6 text-center text-sm text-white/60">
-          <p>&copy; 2024 Tanzania Tech Forge. All rights reserved.</p>
+          <p>&copy; 2025 Tanzania Tech Forge. All rights reserved.</p>
         </div>
       </div>
     </footer>
