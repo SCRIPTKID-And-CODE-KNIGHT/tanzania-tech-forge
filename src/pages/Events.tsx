@@ -17,52 +17,16 @@ import {
 const Events = () => {
   const upcomingEvents = [
     {
-      title: "AI & Machine Learning Workshop",
-      description: "Hands-on workshop covering fundamentals of AI and practical ML applications for business.",
-      date: "March 15, 2024",
-      time: "9:00 AM - 5:00 PM",
-      location: "Tanzania Tech Forge HQ, Dar es Salaam",
-      category: "Workshop",
-      attendees: "25 spots available",
-      price: "TSh 50,000",
-      icon: <GraduationCap className="w-6 h-6" />,
-      status: "Registration Open"
-    },
-    {
-      title: "Cybersecurity Bootcamp",
-      description: "3-day intensive bootcamp on ethical hacking, penetration testing, and security best practices.",
-      date: "March 22-24, 2024",
-      time: "8:00 AM - 6:00 PM",
-      location: "University of Dar es Salaam",
-      category: "Bootcamp",
-      attendees: "30 spots available",
-      price: "TSh 150,000",
-      icon: <GraduationCap className="w-6 h-6" />,
-      status: "Early Bird"
-    },
-    {
-      title: "Tech Startup Competition",
-      description: "Annual competition for innovative tech startups with cash prizes and mentorship opportunities.",
-      date: "April 5, 2024",
+      title: "Tanzania Tech Forge Official Launch",
+      description: "Join us for the grand opening of Tanzania Tech Forge! Experience our cutting-edge technology solutions, meet our expert team, and discover how we're innovating technology for Tanzania's future.",
+      date: "December 31, 2025",
       time: "10:00 AM - 6:00 PM",
-      location: "Mlimani City Conference Center",
-      category: "Competition",
+      location: "Geita, Tanzania",
+      category: "Launch Event",
       attendees: "Open to all",
       price: "Free",
       icon: <Trophy className="w-6 h-6" />,
-      status: "Applications Open"
-    },
-    {
-      title: "Tech Meetup: Mobile Development",
-      description: "Monthly meetup discussing latest trends in mobile app development with industry experts.",
-      date: "April 12, 2024",
-      time: "6:00 PM - 9:00 PM",
-      location: "Innovation Hub, Dar es Salaam",
-      category: "Meetup",
-      attendees: "50 spots available",
-      price: "Free",
-      icon: <Coffee className="w-6 h-6" />,
-      status: "RSVP Open"
+      status: "Registration Open"
     }
   ];
 
